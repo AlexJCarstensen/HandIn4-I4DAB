@@ -7,7 +7,7 @@ namespace Handin4GDEMDS.Migrations
     {
         public override void Up()
         {
-            /*CreateTable(
+            CreateTable(
                 "dbo.AppartmentcharacteristicSet",
                 c => new
                     {
@@ -49,13 +49,13 @@ namespace Handin4GDEMDS.Migrations
                     })
                 .PrimaryKey(t => t.SensorID)
                 .ForeignKey("dbo.AppartmentcharacteristicSet", t => t.Appartmentcharacteristic_appartmentId)
-                .Index(t => t.Appartmentcharacteristic_appartmentId);*/
+                .Index(t => t.Appartmentcharacteristic_appartmentId);
             
         }
         
         public override void Down()
         {
-/*            DropForeignKey("dbo.SensorcharacteristicSet", "Appartmentcharacteristic_appartmentId", "dbo.AppartmentcharacteristicSet");
+            DropForeignKey("dbo.SensorcharacteristicSet", "Appartmentcharacteristic_appartmentId", "dbo.AppartmentcharacteristicSet");
             DropForeignKey("dbo.ReadingSet", "appartmentId", "dbo.AppartmentcharacteristicSet");
             DropForeignKey("dbo.ReadingSet", "SensorID", "dbo.SensorcharacteristicSet");
             DropIndex("dbo.SensorcharacteristicSet", new[] { "Appartmentcharacteristic_appartmentId" });
@@ -63,7 +63,7 @@ namespace Handin4GDEMDS.Migrations
             DropIndex("dbo.ReadingSet", new[] { "SensorID" });
             DropTable("dbo.SensorcharacteristicSet");
             DropTable("dbo.ReadingSet");
-            DropTable("dbo.AppartmentcharacteristicSet");*/
+            DropTable("dbo.AppartmentcharacteristicSet");
         }
     }
 }

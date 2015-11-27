@@ -24,9 +24,6 @@ namespace Handin4GDEMDS
         public MainWindow()
         {
             InitializeComponent();
-            ModelAccess m = new ModelAccess();
-            //m.ReadData();
-            m.GetSensorData(1);
         }
     }
 }
