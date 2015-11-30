@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Handin4DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AppartmentcharacteristicSet">
+          <Key>
+            <PropertyRef Name="appartmentId" />
+          </Key>
+          <Property Name="appartmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="No" Type="int" Nullable="false" />
+          <Property Name="Size" Type="float" Nullable="false" />
+          <Property Name="Floor" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReadingSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="value" Type="float" Nullable="false" />
+          <Property Name="timestamp" Type="datetime" Nullable="false" />
+          <Property Name="SensorID" Type="int" Nullable="false" />
+          <Property Name="appartmentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SensorcharacteristicSet">
+          <Key>
+            <PropertyRef Name="SensorID" />
+          </Key>
+          <Property Name="SensorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="calibrationDate" Type="datetime" Nullable="false" />
+          <Property Name="description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="externalRef" Type="nvarchar(max)" />
+          <Property Name="calibrationEquation" Type="nvarchar(max)" />
+          <Property Name="calibrationCoeff" Type="nvarchar(max)" />
+          <Property Name="unit" Type="nvarchar(max)" />
+          <Property Name="Appartmentcharacteristic_appartmentId" Type="int" />
+        </EntityType>
+        <Association Name="FK_dbo_ReadingSet_dbo_AppartmentcharacteristicSet_appartmentId">
+          <End Role="AppartmentcharacteristicSet" Type="Self.AppartmentcharacteristicSet" Multiplicity="1" />
+          <End Role="ReadingSet" Type="Self.ReadingSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppartmentcharacteristicSet">
+              <PropertyRef Name="appartmentId" />
+            </Principal>
+            <Dependent Role="ReadingSet">
+              <PropertyRef Name="appartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ReadingSet_dbo_SensorcharacteristicSet_SensorID">
+          <End Role="SensorcharacteristicSet" Type="Self.SensorcharacteristicSet" Multiplicity="1" />
+          <End Role="ReadingSet" Type="Self.ReadingSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SensorcharacteristicSet">
+              <PropertyRef Name="SensorID" />
+            </Principal>
+            <Dependent Role="ReadingSet">
+              <PropertyRef Name="SensorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_SensorcharacteristicSet_dbo_AppartmentcharacteristicSet_Appartmentcharacteristic_appartmentId">
+          <End Role="AppartmentcharacteristicSet" Type="Self.AppartmentcharacteristicSet" Multiplicity="0..1" />
+          <End Role="SensorcharacteristicSet" Type="Self.SensorcharacteristicSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppartmentcharacteristicSet">
+              <PropertyRef Name="appartmentId" />
+            </Principal>
+            <Dependent Role="SensorcharacteristicSet">
+              <PropertyRef Name="Appartmentcharacteristic_appartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Handin4DBModelStoreContainer">
+          <EntitySet Name="AppartmentcharacteristicSet" EntityType="Self.AppartmentcharacteristicSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReadingSet" EntityType="Self.ReadingSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SensorcharacteristicSet" EntityType="Self.SensorcharacteristicSet" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_ReadingSet_dbo_AppartmentcharacteristicSet_appartmentId" Association="Self.FK_dbo_ReadingSet_dbo_AppartmentcharacteristicSet_appartmentId">
+            <End Role="AppartmentcharacteristicSet" EntitySet="AppartmentcharacteristicSet" />
+            <End Role="ReadingSet" EntitySet="ReadingSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ReadingSet_dbo_SensorcharacteristicSet_SensorID" Association="Self.FK_dbo_ReadingSet_dbo_SensorcharacteristicSet_SensorID">
+            <End Role="SensorcharacteristicSet" EntitySet="SensorcharacteristicSet" />
+            <End Role="ReadingSet" EntitySet="ReadingSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_SensorcharacteristicSet_dbo_AppartmentcharacteristicSet_Appartmentcharacteristic_appartmentId" Association="Self.FK_dbo_SensorcharacteristicSet_dbo_AppartmentcharacteristicSet_Appartmentcharacteristic_appartmentId">
+            <End Role="AppartmentcharacteristicSet" EntitySet="AppartmentcharacteristicSet" />
+            <End Role="SensorcharacteristicSet" EntitySet="SensorcharacteristicSet" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Handin4DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AppartmentcharacteristicSet">
+          <Key>
+            <PropertyRef Name="appartmentId" />
+          </Key>
+          <Property Name="appartmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="No" Type="Int32" Nullable="false" />
+          <Property Name="Size" Type="Double" Nullable="false" />
+          <Property Name="Floor" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ReadingSets" Relationship="Self.FK_dbo_ReadingSet_dbo_AppartmentcharacteristicSet_appartmentId" FromRole="AppartmentcharacteristicSet" ToRole="ReadingSet" />
+          <NavigationProperty Name="SensorcharacteristicSets" Relationship="Self.FK_dbo_SensorcharacteristicSet_dbo_AppartmentcharacteristicSet_Appartmentcharacteristic_appartmentId" FromRole="AppartmentcharacteristicSet" ToRole="SensorcharacteristicSet" />
+        </EntityType>
+        <EntityType Name="ReadingSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="value" Type="Double" Nullable="false" />
+          <Property Name="timestamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SensorID" Type="Int32" Nullable="false" />
+          <Property Name="appartmentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AppartmentcharacteristicSet" Relationship="Self.FK_dbo_ReadingSet_dbo_AppartmentcharacteristicSet_appartmentId" FromRole="ReadingSet" ToRole="AppartmentcharacteristicSet" />
+          <NavigationProperty Name="SensorcharacteristicSet" Relationship="Self.FK_dbo_ReadingSet_dbo_SensorcharacteristicSet_SensorID" FromRole="ReadingSet" ToRole="SensorcharacteristicSet" />
+        </EntityType>
+        <EntityType Name="SensorcharacteristicSet">
+          <Key>
+            <PropertyRef Name="SensorID" />
+          </Key>
+          <Property Name="SensorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="calibrationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="externalRef" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="calibrationEquation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="calibrationCoeff" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="unit" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Appartmentcharacteristic_appartmentId" Type="Int32" />
+          <NavigationProperty Name="AppartmentcharacteristicSet" Relationship="Self.FK_dbo_SensorcharacteristicSet_dbo_AppartmentcharacteristicSet_Appartmentcharacteristic_appartmentId" FromRole="SensorcharacteristicSet" ToRole="AppartmentcharacteristicSet" />
+          <NavigationProperty Name="ReadingSets" Relationship="Self.FK_dbo_ReadingSet_dbo_SensorcharacteristicSet_SensorID" FromRole="SensorcharacteristicSet" ToRole="ReadingSet" />
+        </EntityType>
+        <Association Name="FK_dbo_ReadingSet_dbo_AppartmentcharacteristicSet_appartmentId">
+          <End Role="AppartmentcharacteristicSet" Type="Self.AppartmentcharacteristicSet" Multiplicity="1" />
+          <End Role="ReadingSet" Type="Self.ReadingSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppartmentcharacteristicSet">
+              <PropertyRef Name="appartmentId" />
+            </Principal>
+            <Dependent Role="ReadingSet">
+              <PropertyRef Name="appartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_SensorcharacteristicSet_dbo_AppartmentcharacteristicSet_Appartmentcharacteristic_appartmentId">
+          <End Role="AppartmentcharacteristicSet" Type="Self.AppartmentcharacteristicSet" Multiplicity="0..1" />
+          <End Role="SensorcharacteristicSet" Type="Self.SensorcharacteristicSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppartmentcharacteristicSet">
+              <PropertyRef Name="appartmentId" />
+            </Principal>
+            <Dependent Role="SensorcharacteristicSet">
+              <PropertyRef Name="Appartmentcharacteristic_appartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ReadingSet_dbo_SensorcharacteristicSet_SensorID">
+          <End Role="SensorcharacteristicSet" Type="Self.SensorcharacteristicSet" Multiplicity="1" />
+          <End Role="ReadingSet" Type="Self.ReadingSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SensorcharacteristicSet">
+              <PropertyRef Name="SensorID" />
+            </Principal>
+            <Dependent Role="ReadingSet">
+              <PropertyRef Name="SensorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Handin4DBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AppartmentcharacteristicSets" EntityType="Self.AppartmentcharacteristicSet" />
+          <EntitySet Name="ReadingSets" EntityType="Self.ReadingSet" />
+          <EntitySet Name="SensorcharacteristicSets" EntityType="Self.SensorcharacteristicSet" />
+          <AssociationSet Name="FK_dbo_ReadingSet_dbo_AppartmentcharacteristicSet_appartmentId" Association="Self.FK_dbo_ReadingSet_dbo_AppartmentcharacteristicSet_appartmentId">
+            <End Role="AppartmentcharacteristicSet" EntitySet="AppartmentcharacteristicSets" />
+            <End Role="ReadingSet" EntitySet="ReadingSets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_SensorcharacteristicSet_dbo_AppartmentcharacteristicSet_Appartmentcharacteristic_appartmentId" Association="Self.FK_dbo_SensorcharacteristicSet_dbo_AppartmentcharacteristicSet_Appartmentcharacteristic_appartmentId">
+            <End Role="AppartmentcharacteristicSet" EntitySet="AppartmentcharacteristicSets" />
+            <End Role="SensorcharacteristicSet" EntitySet="SensorcharacteristicSets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ReadingSet_dbo_SensorcharacteristicSet_SensorID" Association="Self.FK_dbo_ReadingSet_dbo_SensorcharacteristicSet_SensorID">
+            <End Role="SensorcharacteristicSet" EntitySet="SensorcharacteristicSets" />
+            <End Role="ReadingSet" EntitySet="ReadingSets" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Handin4DBModelStoreContainer" CdmEntityContainer="Handin4DBEntities">
+          <EntitySetMapping Name="AppartmentcharacteristicSets">
+            <EntityTypeMapping TypeName="Handin4DBModel.AppartmentcharacteristicSet">
+              <MappingFragment StoreEntitySet="AppartmentcharacteristicSet">
+                <ScalarProperty Name="appartmentId" ColumnName="appartmentId" />
+                <ScalarProperty Name="No" ColumnName="No" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="Floor" ColumnName="Floor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReadingSets">
+            <EntityTypeMapping TypeName="Handin4DBModel.ReadingSet">
+              <MappingFragment StoreEntitySet="ReadingSet">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="value" ColumnName="value" />
+                <ScalarProperty Name="timestamp" ColumnName="timestamp" />
+                <ScalarProperty Name="SensorID" ColumnName="SensorID" />
+                <ScalarProperty Name="appartmentId" ColumnName="appartmentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SensorcharacteristicSets">
+            <EntityTypeMapping TypeName="Handin4DBModel.SensorcharacteristicSet">
+              <MappingFragment StoreEntitySet="SensorcharacteristicSet">
+                <ScalarProperty Name="SensorID" ColumnName="SensorID" />
+                <ScalarProperty Name="calibrationDate" ColumnName="calibrationDate" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="externalRef" ColumnName="externalRef" />
+                <ScalarProperty Name="calibrationEquation" ColumnName="calibrationEquation" />
+                <ScalarProperty Name="calibrationCoeff" ColumnName="calibrationCoeff" />
+                <ScalarProperty Name="unit" ColumnName="unit" />
+                <ScalarProperty Name="Appartmentcharacteristic_appartmentId" ColumnName="Appartmentcharacteristic_appartmentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

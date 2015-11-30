@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="64e93140080e4c3b838e2e0695fc9ae1" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="Handin4DBModel.AppartmentcharacteristicSet" Width="1.5" PointX="3.875" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Handin4DBModel.ReadingSet" Width="1.5" PointX="6.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Handin4DBModel.SensorcharacteristicSet" Width="1.5" PointX="1.75" PointY="4.625" IsExpanded="true" />
+        <AssociationConnector Association="Handin4DBModel.FK_dbo_ReadingSet_dbo_AppartmentcharacteristicSet_appartmentId" ManuallyRouted="false" />
+        <AssociationConnector Association="Handin4DBModel.FK_dbo_SensorcharacteristicSet_dbo_AppartmentcharacteristicSet_Appartmentcharacteristic_appartmentId" ManuallyRouted="false" />
+        <AssociationConnector Association="Handin4DBModel.FK_dbo_ReadingSet_dbo_SensorcharacteristicSet_SensorID" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
