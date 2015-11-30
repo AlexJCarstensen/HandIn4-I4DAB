@@ -5,7 +5,7 @@ namespace Handin4GDEMDS.ModelAccessor
 {
     public class ServiceThread
     {
-        public static event EventHandler DataArrivedEvent;
+        public static event EventHandler<string> DataArrivedEvent;
         private readonly ModelAccess Model;
         private readonly int _maxRead;
 
@@ -27,15 +27,15 @@ namespace Handin4GDEMDS.ModelAccessor
                 Model.ReadSensorData(getter);
                 getter++;
 
-                OnDataArrivedEvent();
+                OnDataArrivedEvent(getter.ToString());
 
                 Thread.Sleep(4 * 1000);
             }
         }
 
-        private static void OnDataArrivedEvent()
+        private static void OnDataArrivedEvent(string arg)
         {
-            DataArrivedEvent?.Invoke(null, EventArgs.Empty);
+            DataArrivedEvent?.Invoke(null, arg);
         }
     }
 }

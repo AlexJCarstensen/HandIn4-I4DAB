@@ -24,6 +24,22 @@ namespace Handin4GDEMDS
             }
         }
 
+        private int _sensorReadNumber;
+
+        public int SensorReadNumber
+        {
+            get
+            {
+                return _sensorReadNumber;
+                
+            }
+            set
+            {
+                _sensorReadNumber = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         protected ModelAccessor.ModelAccess ModelAccess;
         private ObservableCollection<ReadingSet> _readingSets; 
         public ObservableCollection<ReadingSet> ReadingSet => _readingSets;
@@ -36,8 +52,9 @@ namespace Handin4GDEMDS
 
             if(!(ModelAccess.GetSensors().Count > 0)) ModelAccess.ReadData();
 
-            ServiceThread.DataArrivedEvent += (sender, args) =>
+            ServiceThread.DataArrivedEvent += (sender, s) =>
             {
+                SensorReadNumber = int.Parse(s);
                 _readingSets = ModelAccess.GetSensorRead(_selectedIndex);
                 NotifyPropertyChanged(nameof(ReadingSet));
             };

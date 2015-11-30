@@ -44,12 +44,10 @@ namespace Handin4GDEMDS.ModelAccessor
 
             using (var context = new Handin4DatabaseContext())
             {
-                foreach (var a in O.reading)
+                foreach (var a in O.reading.Where(a => context.AppartmentcharacteristicSet.Any(t => t.appartmentId == a.appartmentId) &&
+                                                       context.SensorcharacteristicSet.Any(t => t.SensorID == a.SensorID)))
                 {
-                    if (context.AppartmentcharacteristicSet.Any(t => t.appartmentId == a.appartmentId))
-                    {
-                        context.ReadingSet.Add(a);
-                    }
+                    context.ReadingSet.Add(a);
                 }
                 context.SaveChanges();
             }
