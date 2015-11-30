@@ -34,6 +34,8 @@ namespace Handin4GDEMDS
             ModelAccess = new ModelAccess();
             SelectedIndex = 0;
 
+            if(!(ModelAccess.GetSensors().Count > 0)) ModelAccess.ReadData();
+
             ServiceThread.DataArrivedEvent += (sender, args) =>
             {
                 _readingSets = ModelAccess.GetSensorRead(_selectedIndex);

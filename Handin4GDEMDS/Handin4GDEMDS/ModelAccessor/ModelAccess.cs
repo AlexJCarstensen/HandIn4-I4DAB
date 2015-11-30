@@ -31,7 +31,11 @@ namespace Handin4GDEMDS.ModelAccessor
                 context.SaveChanges();
             }
         }
-
+        /// <summary>
+        /// reads readings from sensor
+        /// </summary>
+        /// <param name="number"></param>
+        /// <returns></returns>
         public bool ReadSensorData(int number)
         {
             var O =
