@@ -7,7 +7,39 @@
         xmlns:chartToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
+    <Window.Resources>
+        <local:ViewModel x:Key="ViewModel"/>
+    </Window.Resources>
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <ListView Grid.Column="0"
+                  ItemsSource="{Binding Source={StaticResource ViewModel}, Path=Sensors}"
+                  SelectedIndex="{Binding Source={StaticResource ViewModel}, Path=SelectedIndex, Mode=TwoWay}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="SensorId"
+                                    DisplayMemberBinding="{Binding Path=SensorID}"></GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <ListView Grid.Column="1" 
+                  ItemsSource="{Binding Source={StaticResource ViewModel}, Path=ReadingSet}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="SensorId"
+                                    DisplayMemberBinding="{Binding Path=SensorID}"/>
+                    <GridViewColumn Header="AppartmentId"
+                                    DisplayMemberBinding="{Binding Path=appartmentId}"/>
+                    <GridViewColumn Header="Time"
+                                    DisplayMemberBinding="{Binding Path=timestamp}"/>
+                    <GridViewColumn Header="Value"
+                                    DisplayMemberBinding="{Binding Path=value}"/>
+                    
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>

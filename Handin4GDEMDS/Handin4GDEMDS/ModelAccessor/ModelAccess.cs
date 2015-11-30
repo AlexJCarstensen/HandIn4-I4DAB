@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using Handin4GDEMDS.Database;
 using Handin4GDEMDS.Database.DbSets;
 
@@ -30,7 +32,7 @@ namespace Handin4GDEMDS.ModelAccessor
             }
         }
 
-        public bool GetSensorData(int number)
+        public bool ReadSensorData(int number)
         {
             var O =
                 JsonStringToObject<SensorRead>.Convert(
@@ -50,6 +52,22 @@ namespace Handin4GDEMDS.ModelAccessor
 
             return true;
         }
+
+        public ObservableCollection<ReadingSet> GetSensorRead(int sensorId)
+        {
+            using (var context = new Handin4DatabaseContext())
+            {
+                return new ObservableCollection<ReadingSet>(context.ReadingSet.Where(t => t.SensorID == sensorId));  
+            }
+        }
+
+        public ObservableCollection<SensorcharacteristicSet> GetSensors()
+        {
+            using (var context = new Handin4DatabaseContext())
+            {
+                return new ObservableCollection<SensorcharacteristicSet>(context.SensorcharacteristicSet);
+            }
+        } 
 
     }
 }
