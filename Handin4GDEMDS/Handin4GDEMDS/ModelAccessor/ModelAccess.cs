@@ -67,6 +67,7 @@ namespace Handin4GDEMDS.ModelAccessor
         {
             using (var context = new Handin4DatabaseContext())
             {
+                
                 return new ObservableCollection<SensorcharacteristicSet>(context.SensorcharacteristicSet);
             }
         } 
