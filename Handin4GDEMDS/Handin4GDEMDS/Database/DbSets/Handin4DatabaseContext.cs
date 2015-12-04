@@ -8,7 +8,7 @@ namespace Handin4GDEMDS.Database.DbSets
     public partial class Handin4DatabaseContext : DbContext
     {
         public Handin4DatabaseContext()
-            : base("name=Handin4DatabaseContext3")
+            : base("name=JesperServer")
         {
         }
 
